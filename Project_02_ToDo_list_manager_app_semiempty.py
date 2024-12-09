@@ -1,6 +1,7 @@
-# Prg24-26_Project_02_ToDo_list_manager_app
-
-Project_02_ToDo_list_manager_app.py
+# -*- coding: utf-8 -*-
+# Příliš žluťoučký kůň úpěl ďábelské ódy - testovací pangram
+"""_summary_
+Project_02_ToDo_list_manager_app_semiempty.py
 
 Vytvořte terminálovou aplikaci, která bude sloužit jako ToDo list. 
 Aplikace umožní uživateli spravovat úkoly, ukládat je do souboru a načítat při startu aplikace. 
@@ -9,7 +10,7 @@ Aplikace umožní uživateli spravovat úkoly, ukládat je do souboru a načíta
 * Přidání úkolu - aplikace umožní uživateli přidat nový úkol. 
   Každý úkol bude obsahovat následující vlastnosti:
         Název úkolu (povinný)
-        Priorita úkolu (nízká, střední, vysoká) – volitelné, výchozí je střední.
+        Priorita úkolu (nízká, střední, vysoká), výchozí je střední.
         Termín splnění úkolu ve formátu YYYY-MM-DD (volitelné, může být prázdné).
         Status úkolu (hotovo/nehotovo), který se bude standardně nastavovat na "nehotovo" při vytvoření nového úkolu.
 * Zobrazení seznamu úkolů - uživatel může zobrazit seznam všech úkolů. 
@@ -59,7 +60,6 @@ Seznam úkolů bude uložen v textovém souboru ve složce data, který bude mí
 * data/todo_tasks.txt
   Soubor s úkoly, který se bude načítat při startu aplikace a ukládat při ukončení.
 
-
 ## Ukázkový výpis aplikace:
         === ToDo List Manager ===
         Nápověda: použijte příkazy 'add', 'list', 'remove', 'complete', 'edit', 'save', 'exit' pro práci s úkoly.
@@ -96,13 +96,17 @@ Seznam úkolů bude uložen v textovém souboru ve složce data, který bude mí
 
 ## Detailní popis jednotlivých funkcí:
 * load_tasks()
-  Funkce pro načtení všech úkolů z textového souboru při spuštění aplikace. Pokud soubor neexistuje, vytvoří se prázdná seznamová struktura.
+  Funkce pro načtení všech úkolů z textového souboru při spuštění aplikace. 
+  Pokud soubor neexistuje, vytvoří se prázdná seznamová struktura.
 * save_tasks()
-  Uloží aktuální stav seznamu úkolů do souboru. Při ukončení aplikace dojde k automatickému uložení, ale uživatel může zadat příkaz save pro ruční uložení kdykoliv.
+  Uloží aktuální stav seznamu úkolů do souboru. Při ukončení aplikace dojde k automatickému uložení, 
+  ale uživatel může zadat příkaz save pro ruční uložení kdykoliv.
 * add_task()
-  Přidá nový úkol. Uživatel zadá název, prioritu a termín. Pokud není zadaný termín, pole termínu zůstane prázdné. Každý úkol je přiřazen ID, které je automaticky generováno.
+  Přidá nový úkol. Uživatel zadá název, prioritu a termín. Pokud není zadaný termín, pole termínu 
+  zůstane prázdné. Každý úkol je přiřazen ID, které je automaticky generováno.
 * list_tasks()
-  Zobrazí všechny úkoly ve formě tabulky. Uživatel může filtrovat úkoly podle priority, termínu nebo statusu (hotovo/nehotovo).
+  Zobrazí všechny úkoly ve formě tabulky. Uživatel může filtrovat úkoly podle priority, 
+  termínu nebo statusu (hotovo/nehotovo).
 * remove_task()
   Umožňuje odstranit úkol podle ID nebo názvu.
 * complete_task()
@@ -115,3 +119,127 @@ Všechny změny se ukládají do souboru todo_tasks.txt, který je přístupný 
 Po spuštění aplikace se úkoly automaticky načtou, takže uživatel může pokračovat tam, kde skončil.
 Data jsou ukládána ve formátu, který umožňuje jednoduchou editaci i mimo aplikaci (např. v textovém editoru).
 
+"""
+
+
+import os
+from datetime import datetime
+
+
+##############################################################
+# Cesta k souboru s úkoly
+TASKS_FILE = "data/todo_tasks.txt"
+
+
+##############################################################
+def load_tasks():
+    """Načte úkoly ze souboru do seznamu slovníků.
+    Returns:
+        list: seznam úkolů, kde každý úkol je slovník s vlastnostmi.
+    """
+
+
+
+##############################################################
+def save_tasks(tasks):
+    """Uloží úkoly do souboru.
+    Args:
+        tasks: list, seznam úkolů ve formě slovníků.
+    """
+
+
+
+
+##############################################################
+def add_task(tasks):
+    """Přidá nový úkol na seznam.
+    Args:
+        tasks: list, aktuální seznam úkolů.
+    Returns:
+        list, aktualizovaný seznam úkolů.
+    """
+
+
+
+
+##############################################################
+def list_tasks(tasks, filter_by=None):
+    """Vypíše úkoly podle zadaného filtru.
+    Args:
+        tasks: list, seznam úkolů.
+        filter_by: dict, filtr pro zobrazení úkolů (např. stav, priorita).
+    """
+
+
+
+
+##############################################################
+def remove_task(tasks):
+    """Odstraní úkol na základě ID.
+    Args:
+        tasks: list, aktuální seznam úkolů.
+    Returns:
+        list, aktualizovaný seznam úkolů.
+    """
+
+
+
+
+##############################################################
+def complete_task(tasks):
+    """Označí úkol jako dokončený.
+    Args:
+        tasks: list, aktuální seznam úkolů.
+    """
+
+
+
+##############################################################
+def edit_task(tasks):
+    """Umožní uživateli upravit název, prioritu nebo termín úkolu.
+    Args:
+        tasks: list, aktuální seznam úkolů.
+    """
+
+
+
+
+##############################################################
+def main(command, tasks):
+    """Řídí zpracování jednotlivých příkazů.
+    Args:
+        command: str, zadaný příkaz od uživatele.
+        tasks: list, seznam úkolů.
+    Returns:
+        list, aktualizovaný seznam úkolů.
+    """
+
+
+
+
+
+##############################################################
+### Spuštění programu - MAIN
+
+if __name__ == "__main__":
+    os.system('clear' if os.name == 'posix' else 'cls')
+
+    # Načtení úkolů ze souboru
+    tasks = load_tasks()
+
+    print("\n=== ToDo List Manager - aktuální seznam úkolů ===")
+    list_tasks(tasks)
+
+    while True:
+        # Základní menu
+        print("\n=== ToDo List Manager ===")
+        print("Příkazy: 'add', 'list', 'remove', 'complete', 'edit', 'save', 'exit'")
+        command = input("Zadejte příkaz: ").strip().lower()
+
+        if command == "exit":
+            # Automatické uložení úkolů při ukončení
+            save_tasks(tasks)
+            print("Úkoly byly uloženy. Ukončuji aplikaci.")
+            break
+        else:
+            tasks = main(command, tasks)

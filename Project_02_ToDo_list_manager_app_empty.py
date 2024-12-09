@@ -1,6 +1,7 @@
-# Prg24-26_Project_02_ToDo_list_manager_app
-
-Project_02_ToDo_list_manager_app.py
+# -*- coding: utf-8 -*-
+# Příliš žluťoučký kůň úpěl ďábelské ódy - testovací pangram
+"""_summary_
+Project_02_ToDo_list_manager_app_empty.py
 
 Vytvořte terminálovou aplikaci, která bude sloužit jako ToDo list. 
 Aplikace umožní uživateli spravovat úkoly, ukládat je do souboru a načítat při startu aplikace. 
@@ -9,7 +10,7 @@ Aplikace umožní uživateli spravovat úkoly, ukládat je do souboru a načíta
 * Přidání úkolu - aplikace umožní uživateli přidat nový úkol. 
   Každý úkol bude obsahovat následující vlastnosti:
         Název úkolu (povinný)
-        Priorita úkolu (nízká, střední, vysoká) – volitelné, výchozí je střední.
+        Priorita úkolu (nízká, střední, vysoká), výchozí je střední.
         Termín splnění úkolu ve formátu YYYY-MM-DD (volitelné, může být prázdné).
         Status úkolu (hotovo/nehotovo), který se bude standardně nastavovat na "nehotovo" při vytvoření nového úkolu.
 * Zobrazení seznamu úkolů - uživatel může zobrazit seznam všech úkolů. 
@@ -59,7 +60,6 @@ Seznam úkolů bude uložen v textovém souboru ve složce data, který bude mí
 * data/todo_tasks.txt
   Soubor s úkoly, který se bude načítat při startu aplikace a ukládat při ukončení.
 
-
 ## Ukázkový výpis aplikace:
         === ToDo List Manager ===
         Nápověda: použijte příkazy 'add', 'list', 'remove', 'complete', 'edit', 'save', 'exit' pro práci s úkoly.
@@ -96,13 +96,17 @@ Seznam úkolů bude uložen v textovém souboru ve složce data, který bude mí
 
 ## Detailní popis jednotlivých funkcí:
 * load_tasks()
-  Funkce pro načtení všech úkolů z textového souboru při spuštění aplikace. Pokud soubor neexistuje, vytvoří se prázdná seznamová struktura.
+  Funkce pro načtení všech úkolů z textového souboru při spuštění aplikace. 
+  Pokud soubor neexistuje, vytvoří se prázdná seznamová struktura.
 * save_tasks()
-  Uloží aktuální stav seznamu úkolů do souboru. Při ukončení aplikace dojde k automatickému uložení, ale uživatel může zadat příkaz save pro ruční uložení kdykoliv.
+  Uloží aktuální stav seznamu úkolů do souboru. Při ukončení aplikace dojde k automatickému uložení, 
+  ale uživatel může zadat příkaz save pro ruční uložení kdykoliv.
 * add_task()
-  Přidá nový úkol. Uživatel zadá název, prioritu a termín. Pokud není zadaný termín, pole termínu zůstane prázdné. Každý úkol je přiřazen ID, které je automaticky generováno.
+  Přidá nový úkol. Uživatel zadá název, prioritu a termín. Pokud není zadaný termín, pole termínu 
+  zůstane prázdné. Každý úkol je přiřazen ID, které je automaticky generováno.
 * list_tasks()
-  Zobrazí všechny úkoly ve formě tabulky. Uživatel může filtrovat úkoly podle priority, termínu nebo statusu (hotovo/nehotovo).
+  Zobrazí všechny úkoly ve formě tabulky. Uživatel může filtrovat úkoly podle priority, 
+  termínu nebo statusu (hotovo/nehotovo).
 * remove_task()
   Umožňuje odstranit úkol podle ID nebo názvu.
 * complete_task()
@@ -114,4 +118,66 @@ Seznam úkolů bude uložen v textovém souboru ve složce data, který bude mí
 Všechny změny se ukládají do souboru todo_tasks.txt, který je přístupný v podadresáři data.
 Po spuštění aplikace se úkoly automaticky načtou, takže uživatel může pokračovat tam, kde skončil.
 Data jsou ukládána ve formátu, který umožňuje jednoduchou editaci i mimo aplikaci (např. v textovém editoru).
+
+"""
+
+
+import os
+from datetime import datetime
+
+TASKS_FILE_PATH = "data/todo_tasks.txt"
+
+def load_tasks():
+
+    tasks = []
+    if os.path.exists(TASKS_FILE_PATH):
+        with open(TASKS_FILE_PATH, "r", encoding="utf-8") as file:
+            for line in file:
+                blocks = line.strip().split(";")
+                tasks.append(
+                    {
+                        "id": int(blocks[0]),
+                        "name": blocks[1],
+                        "priority": blocks[2],
+                        "date": blocks[3],
+                        "status": blocks[4]
+                    }
+                )
+    else:
+        raise ValueError("No data file, please correct the program files.")
+    return tasks
+
+
+def save_tasks(tasks):
+    os.makedirs("data", exist_ok=True)
+    with open(TASKS_FILE_PATH, "w", encoding="utf-8") as file:
+        for task in tasks:
+            file.write(f"{task['id']};{task['name']};{task['priority']};{task['date']};{task['status']}\n")
+
+
+
+def add_task(tasks):
+    name = input("Zadejte název úkolu: ")
+    priority = input("Zadejte prioritu úkolu (Nízká, Střední, Vysoká): ")
+    if priority == "":
+        priority = "Střední"
+    date = input("Zadejte termín splnění (YYYY-MM-DD) (volitelné): ")
+    task_id = task_id = max([task["id"] for task in tasks], default=0) + 1
+    tasks.append({      "id": task_id,
+                        "name": name,
+                        "priority": priority,
+                        "date": date,
+                        "status": "ne"
+                                        })
+
+
+
+
+
+
+
+##############################################################
+### Spuštění programu - MAIN
+
+
 
